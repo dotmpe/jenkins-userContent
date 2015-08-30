@@ -1,0 +1,17 @@
+
+# test files
+
+sudo: false
+
+install:
+- npm install
+
+script:
+- grunt
+- rst2html ReadMe.rst build/html/ReadMe.html
+
+branches:
+  only:
+  - test
+  - '/^[0-9]*\.[0-9]*\.[0-9]*/'
+

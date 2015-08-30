@@ -1,0 +1,25 @@
+{
+  "name": "jenkins-userContent-mpe",
+  "description": "CSS/JS for jenkins",
+  "version": "0.0.2-master",
+  "author": "",
+  "license": "ISC",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dotmpe/jenkins-usercontent.git"
+  },
+  "devDependencies": {
+    "doony": "git://github.com/kevinburke/doony#master",
+    "grunt": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-shell": "^1.1.2",
+    "load-grunt-config": "latest",
+    "load-grunt-tasks": "latest",
+    "twitter-bootstrap": "^2.1.1"
+  }
+}
