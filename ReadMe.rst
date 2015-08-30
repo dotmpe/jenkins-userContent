@@ -1,4 +1,10 @@
 :Version: 0.0.2-master
+:Test status:
+
+  .. image:: https://secure.travis-ci.org/dotmpe/jenkins-userContent.png
+    :target: https://travis-ci.org/dotmpe/jenkins-userContent
+    :alt: Build
+  
 
 - Some styling of Jenkins and report HTML in Jenkins. See Gruntfile for how
   files are build. Includes Doony_

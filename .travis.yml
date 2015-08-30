@@ -4,11 +4,14 @@
 sudo: false
 
 install:
+- npm install -g recess stylus
 - npm install
+- pip install --user docutils
 
 script:
 - grunt
-- rst2html ReadMe.rst build/html/ReadMe.html
+- mkdir -vp build/html
+- rst2html.py ReadMe.rst build/html/ReadMe.html
 
 branches:
   only:
