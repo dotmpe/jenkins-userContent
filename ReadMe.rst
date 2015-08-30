@@ -1,4 +1,4 @@
-:Version: 0.0.2-master
+:Version: 0.0.2-test
 :Test status:
 
   .. image:: https://secure.travis-ci.org/dotmpe/jenkins-userContent.png
@@ -17,5 +17,5 @@
 - To build, jenkins runs `npm` and `grunt` to ensure modules are up to date
   and files are jshinted and refreshed.
 
-.. Id: jenkins-usercontent/0.0.2-master ReadMe.rst
+.. Id: jenkins-usercontent/0.0.2-test ReadMe.rst
 
