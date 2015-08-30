@@ -10,6 +10,7 @@ install:
 
 script:
 - grunt
+- mkdir -vp build/html
 - rst2html.py ReadMe.rst build/html/ReadMe.html
 
 branches:
