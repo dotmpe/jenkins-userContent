@@ -29,7 +29,7 @@
     - shell: '
          npm install;
          grunt;
-         cp userContent.{{css,js}} /var/lib/jenkins/userContent/;
+         cp userContent.{{css,js}} $JENKINS_HOME/userContent/;
          mkdir -p build/html;
          rst2html ReadMe.rst build/html/ReadMe.html;
        '
@@ -71,10 +71,10 @@
     jobs:
     - jenkins-userContent:
         display-name: '{title}'
+        #title: 'Jenkins JS/CSS'
+        description: !include-raw .jenkins-description.html
         git: 'git@github.com:dotmpe/jenkins-usercontent.git'
         branch: 'origin/master'
-        title: 'Jenkins JS/CSS'
-        htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
         build-summary-image: ws/logo.png
         build-config: jenkins-ci.yaml
         version: 0.0.2
