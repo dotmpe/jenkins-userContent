@@ -7,6 +7,10 @@ install:
 - npm install -g recess stylus
 - npm install
 
+addons:
+  apt:
+    packages:
+    - docutils
 
 script:
 - grunt
