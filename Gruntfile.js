@@ -8,13 +8,14 @@ module.exports = function(grunt) {
 
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        reporter: require("jshint-junit-reporter"),
+        reporterOutput: "build/junit-out/jshint.xml"
       },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      },
-      "package": {
-        src: 'package.json'
+      all: {
+        src: [
+          'package.json', '*.js'
+        ]
       }
     },
 
@@ -50,6 +51,16 @@ module.exports = function(grunt) {
         ]
       },
     },
+
+    // XXX: could use for other XML results maybe
+    //junit_report: {
+    //  options: {
+    //    // Task-specific options go here.
+    //  },
+    //  your_target: {
+    //    // Target-specific file lists and/or options go here.
+    //  },
+    //},
 
   });
 

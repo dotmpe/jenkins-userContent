@@ -17,7 +17,10 @@
     "grunt": "latest",
     "grunt-contrib-jshint": "latest",
     "grunt-contrib-watch": "latest",
+    "grunt-junit-report": "0.0.4",
     "grunt-shell": "^1.1.2",
+    "grunt-xsltproc": "^0.5.1",
+    "jshint-junit-reporter": "^0.2.2",
     "load-grunt-config": "latest",
     "load-grunt-tasks": "latest",
     "twitter-bootstrap": "^2.1.1"
