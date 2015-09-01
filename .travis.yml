@@ -4,7 +4,8 @@
 sudo: false
 
 install:
-- npm install -g recess stylus
+- test -x $(which stylus) || npm install -g stylus
+- test -x $(which recess) || npm install -g recess
 - npm install
 - pip install --user docutils
 
