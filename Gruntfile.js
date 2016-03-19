@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         command: 'recess --compile node_modules/twitter-bootstrap/less/bootstrap.less > bootstrap.css'
       },
       userContentStylus: {
-        command: 'stylus --include-css --import ' + features_file +' userContent.styl'
+        command: 'stylus --include-css --import ./' + features_file +' userContent.styl'
       },
       userContentJs: {
         command: './build-userContent-js.sh '+ features_file
