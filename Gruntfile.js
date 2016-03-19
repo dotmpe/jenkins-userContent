@@ -11,10 +11,11 @@ module.exports = function(grunt) {
 
   var features_file;
 
-  if (fs.existsSync(build_features_file)) {
-    features_file = build_features_file;
+  var pwd = process.cwd(); // Help stylus a bit
+  if (fs.existsSync(pwd+'/'+build_features_file)) {
+    features_file = pwd+'/'+build_features_file;
   } else {
-    features_file = features_defaults_file;
+    features_file = pwd+'/'+features_defaults_file;
   }
 
   // FIXME: feature compilation
@@ -69,7 +70,7 @@ module.exports = function(grunt) {
         command: 'recess --compile node_modules/twitter-bootstrap/less/bootstrap.less > bootstrap.css'
       },
       userContentStylus: {
-        command: 'stylus --include-css --import ./' + features_file +' userContent.styl'
+        command: 'stylus --include-css --import '+ features_file +' userContent.styl'
       },
       userContentJs: {
         command: './build-userContent-js.sh '+ features_file
