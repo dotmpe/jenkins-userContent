@@ -50,13 +50,6 @@
          fail-on-error: true
     - jtb-inline-tasks-parser:
          project-src: '*.styl,*.yaml,Gruntfile.js'
-  #       health-threshold: low
-  #       can-run-on-failed: true
-  #       use-stable-build-as-reference: false
-  #       use-delta-values: false
-  #       should-detect-modules: false
-  #       do-not-resolve-relative-paths: true
-  #       dont-compute-new: true
     - email:
          notify-every-unstable: false
          send-to-individuals: true
