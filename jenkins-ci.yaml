@@ -70,7 +70,7 @@
     jobs:
     - jenkins-userContent:
         display-name: '{title}'
-        git: 'git@github.com:dotmpe/jenkins-userContent.git'
+        git: 'https://github.com/dotmpe/jenkins-userContent.git'
         branch: 'origin/master'
         title: 'Jenkins JS/CSS'
         htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
