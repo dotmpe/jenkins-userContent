@@ -6,7 +6,7 @@
 
 
 - job-template:
-    name: 'Jenkins/userContent'
+    name: 'jenkins-userContent'
 
     description:
 
@@ -73,7 +73,7 @@
 
 
 - project:
-    name: jenkins-userContent
+    name: Jenkins/-userContent
 
     node: master
 
