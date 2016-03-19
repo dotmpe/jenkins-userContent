@@ -9,6 +9,7 @@ install:
 - test -n "$(which stylus)" || npm install -g stylus
 - test -n "$(which recess)" || npm install -g recess
 - test -n "$(which grunt)" || npm install -g grunt grunt-cli
+- rm -rf $HOME/build
 - mkdir -vp $HOME/build $HOME/.local/{bin,lib}
 - git clone https://github.com/dotmpe/git-versioning.git $HOME/build/git-versioning
 - echo PATH=$PATH
