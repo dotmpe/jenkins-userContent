@@ -6,7 +6,7 @@
 
 
 - job-template:
-    name: 'jenkins-userContent'
+    name: 'Jenkins/userContent'
 
     description:
 
@@ -73,12 +73,12 @@
 
 
 - project:
-    name: Jenkins/-userContent
+    name: Jenkins-userContent
 
     node: master
 
     jobs:
-    - jenkins-userContent:
+    - Jenkins/userContent:
         display-name: '{title}'
         git: 'https://github.com/dotmpe/jenkins-userContent.git'
         branch: 'origin/master'
