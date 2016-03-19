@@ -4,9 +4,9 @@
 sudo: false
 
 install:
-- test -x $(which stylus) || npm install -g stylus
-- test -x $(which recess) || npm install -g recess
-- test -x $(which grunt) || npm install -g grunt grunt-cli
+- test -n "$(which stylus)" || npm install -g stylus
+- test -n "$(which recess)" || npm install -g recess
+- test -n "$(which grunt)" || npm install -g grunt grunt-cli
 - npm install
 - pip install --user docutils
 
