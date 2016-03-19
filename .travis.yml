@@ -12,6 +12,9 @@ install:
 
 script:
 - grunt
+- test -w "$HOME/userContent" && {
+    cp userContent.{css,js} $HOME/userContent/
+  } || echo "Note userContent is not writable, no files installed"
 - mkdir -vp build/html
 - rst2html.py ReadMe.rst build/html/ReadMe.html
 
