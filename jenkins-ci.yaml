@@ -35,8 +35,8 @@
         npm install
         grunt
         mkdir -vp $HOME/userContent
-        cp userContent.{css,js} $HOME/userContent/
-        mkdir -p build/html
+        cp userContent.{{css,js}} $HOME/userContent/
+        mkdir -vp build/html
         rst2html ReadMe.rst build/html/ReadMe.html
 
     wrappers:
