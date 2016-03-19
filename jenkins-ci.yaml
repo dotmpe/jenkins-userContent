@@ -45,7 +45,7 @@
 
     publishers:
     - logparser:
-         parse-rules: {jenkins_home}/log-rules.txt
+         parse-rules: '{jenkins_home}/log-rules.txt'
          unstable-on-warning: true
          fail-on-error: true
     - jtb-inline-tasks-parser:
