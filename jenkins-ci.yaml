@@ -1,6 +1,10 @@
 - defaults:
     name: globals
 
+    jenkins_home: /var/lib/jenkins
+    failure-emailto: dev@dotmpe.com
+
+
 - job-template:
     name: jenkins-userContent
 
@@ -23,40 +27,40 @@
         wipe-workspace: false
 
     triggers:
-    - pollscm: "*/1 * * * *"
+    - pollscm:
+        cron: "*/1 * * * *"
 
     builders:
-    - shell: '
-         npm install;
-         grunt;
-         cp userContent.{{css,js}} /var/lib/jenkins/userContent/;
-         mkdir -p build/html;
-         rst2html ReadMe.rst build/html/ReadMe.html;
-       '
+    - shell: |
+        npm install
+        grunt
+        cp userContent.{css,js} $HOME/userContent/
+        mkdir -p build/html
+        rst2html ReadMe.rst build/html/ReadMe.html
 
     wrappers:
     - timestamps
     - ansicolor:
-         colormap: vga
+         colormap: css
 
     publishers:
     - logparser:
-         parse-rules: /var/lib/jenkins/log-rules.txt
+         parse-rules: {jenkins_home}/log-rules.txt
          unstable-on-warning: true
          fail-on-error: true
-    - task-scanner:
-         pattern: '*.styl,*.yaml,Gruntfile.js'
-         health-threshold: low
-         can-run-on-failed: true
-         use-stable-build-as-reference: false
-         use-delta-values: false
-         should-detect-modules: false
-         do-not-resolve-relative-paths: true
-         dont-compute-new: true
+    - jtb-inline-tasks-parser:
+         project-src: '*.styl,*.yaml,Gruntfile.js'
+  #       health-threshold: low
+  #       can-run-on-failed: true
+  #       use-stable-build-as-reference: false
+  #       use-delta-values: false
+  #       should-detect-modules: false
+  #       do-not-resolve-relative-paths: true
+  #       dont-compute-new: true
     - email:
          notify-every-unstable: false
          send-to-individuals: true
-         recipients: 'dev@dotmpe.com'
+         recipients: '{failure-emailto}'
     - html-publisher:
          name: 'Project ReadMe'
          dir: build/html/
@@ -68,10 +72,12 @@
 - project:
     name: jenkins-userContent
 
+    node: master
+
     jobs:
     - jenkins-userContent:
         display-name: '{title}'
-        git: 'git@github.com:dotmpe/jenkins-usercontent.git'
+        git: 'git@github.com:dotmpe/jenkins-userContent.git'
         branch: 'origin/master'
         title: 'Jenkins JS/CSS'
         htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
