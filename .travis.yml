@@ -13,8 +13,9 @@ install:
 - pip install --user docutils
 
 script:
-- grunt shell:generateFeatures -env=$ENV --features="bootstrap-css doony-css extra-css doony-js extra-js"
-- grunt --env=$ENV
+#- grunt shell:generateFeatures -env=$ENV --features="bootstrap-css doony-css extra-css doony-js extra-js"
+#- grunt --env=$ENV
+- grunt
 - test -w "$HOME/userContent" && { cp -v userContent.{css,js} $HOME/userContent/; } || echo "Note userContent is not writable, no files installed"
 - mkdir -vp build/html
 - rst2html.py ReadMe.rst build/html/ReadMe.html

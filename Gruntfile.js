@@ -63,7 +63,7 @@ module.exports = function(grunt) {
         command: 'git-versioning check'
       },
       generateFeatures: {
-        command: 'node gen-features.js > ' + build_features_file
+        command: 'node ./gen-features.js > ' + build_features_file
       },
       bootstrapCss: {
         command: 'recess --compile node_modules/twitter-bootstrap/less/bootstrap.less > bootstrap.css'
