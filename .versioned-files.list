@@ -2,3 +2,4 @@ ReadMe.rst
 build-userContent-js.sh
 package.json
 jenkins-ci.yaml
+script/sh/util.sh

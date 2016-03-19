@@ -1,5 +1,7 @@
 
-# test files
+# Id: jenkins-userContent/0.0.2-master 
+
+# Configuration for containerized test build at travis-ci.org or compatible stacks.
 
 sudo: false
 
@@ -11,7 +13,8 @@ install:
 - pip install --user docutils
 
 script:
-- grunt
+- grunt shell:generateFeatures -env=$ENV --features="bootstrap-css doony-css extra-css doony-js extra-js"
+- grunt --env=$ENV
 - test -w "$HOME/userContent" && { cp -v userContent.{css,js} $HOME/userContent/; } || echo "Note userContent is not writable, no files installed"
 - mkdir -vp build/html
 - rst2html.py ReadMe.rst build/html/ReadMe.html
