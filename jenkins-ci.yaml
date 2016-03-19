@@ -6,7 +6,7 @@
 
 
 - job-template:
-    name: jenkins-userContent
+    name: 'Jenkins/userContent'
 
     description:
 
@@ -31,13 +31,22 @@
         cron: "*/1 * * * *"
 
     builders:
-    - shell: |
-        npm install
-        grunt
-        mkdir -vp $HOME/userContent
-        cp userContent.{{css,js}} $HOME/userContent/
-        mkdir -vp build/html
-        rst2html ReadMe.rst build/html/ReadMe.html
+#    - shell: |
+#        npm install
+#        grunt
+#        mkdir -vp $HOME/userContent
+#        cp userContent.{{css,js}} $HOME/userContent/
+#        mkdir -vp build/html
+#        rst2html ReadMe.rst build/html/ReadMe.html
+
+    - raw:
+        xml: |
+          <ruby-proxy-object>
+            <ruby-object ruby-class="Jenkins::Tasks::BuilderProxy" pluginid="travis-yml">
+              <object ruby-class="TravisYmlBuilder" pluginid="travis-yml"/>
+              <pluginid pluginid="travis-yml" ruby-class="String">travis-yml</pluginid>
+            </ruby-object>
+          </ruby-proxy-object>
 
     wrappers:
     - timestamps
@@ -51,10 +60,10 @@
          fail-on-error: true
     - jtb-inline-tasks-parser:
          project-src: '*.styl,*.yaml,Gruntfile.js'
-    - email:
-         notify-every-unstable: false
-         send-to-individuals: true
-         recipients: '{failure-emailto}'
+#    - email:
+#         notify-every-unstable: false
+#         send-to-individuals: true
+#         recipients: '{failure-emailto}'
     - html-publisher:
          name: 'Project ReadMe'
          dir: build/html/
@@ -78,4 +87,5 @@
         build-summary-image: ws/logo.png
         build-config: jenkins-ci.yaml
         version: 0.0.2
+
 
