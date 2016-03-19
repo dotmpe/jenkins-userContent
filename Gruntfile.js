@@ -11,11 +11,10 @@ module.exports = function(grunt) {
 
   var features_file;
 
-  var pwd = process.cwd(); // Help stylus a bit
-  if (fs.existsSync(pwd+'/'+build_features_file)) {
-    features_file = pwd+'/'+build_features_file;
+  if (fs.existsSync(build_features_file)) {
+    features_file = build_features_file;
   } else {
-    features_file = pwd+'/'+features_defaults_file;
+    features_file = features_defaults_file;
   }
 
   // FIXME: feature compilation
