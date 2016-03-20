@@ -18,7 +18,6 @@ install:
 - test -n "$(which git-versioning)" || ( cd $HOME/build/git-versioning && ./configure.sh $HOME/.local && ENV=production ./install.sh )
 - npm install
 - pip install --user docutils
-- test -z "$(which bats)" || export feature_bats_test=1
 
 script:
 #- grunt shell:generateFeatures -env=$ENV --features="bootstrap-css doony-css extra-css doony-js extra-js"
@@ -26,6 +25,7 @@ script:
 - echo PATH=$PATH
 - export PATH=$PATH:$HOME/.local/bin
 - echo PATH=$PATH
+- test -z "$(which bats)" || export feature_bats_test=1
 - git clean -df
 - test -n "$feature_bats_test" && grunt || grunt build jshint:all shell:version-check
 - test -w "$HOME/userContent" && { cp -v userContent.{css,js} $HOME/userContent/; } || echo "Note userContent is not writable, no files installed"
