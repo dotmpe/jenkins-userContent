@@ -26,8 +26,7 @@ script:
 - export PATH=$PATH:$HOME/.local/bin
 - echo PATH=$PATH
 - git clean -df
-- set -e
-- bats --version && grunt || grunt "build jshint:all shell:version-check"
+- 'bats --version && grunt || grunt "build jshint:all shell:version-check"'
 - test -w "$HOME/userContent" && { cp -v userContent.{css,js} $HOME/userContent/; } || echo "Note userContent is not writable, no files installed"
 - mkdir -vp build/html
 - rst2html.py ReadMe.rst build/html/ReadMe.html
