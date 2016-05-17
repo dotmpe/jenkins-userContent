@@ -1,10 +1,11 @@
 
-# Id: jenkins-userContent/0.0.2-master 
+# Jenkins/userContent JS/CSS w/o JTB
 
 - defaults:
     name: globals
 
-    jenkins_home: /var/lib/jenkins
+    ansi-map: css
+    jenkins-home: /var/lib/jenkins
     failure-emailto: dev@dotmpe.com
 
 
@@ -23,7 +24,8 @@
     - git:
         url: '{git}'
         branches:
-        - '{branch}'
+        - '*/{branch}'
+        local-branch: '{branch}'
         submodule:
           recursive: true
         skip-tag: true
@@ -34,14 +36,6 @@
         cron: "*/1 * * * *"
 
     builders:
-#    - shell: |
-#        npm install
-#        grunt
-#        mkdir -vp $HOME/userContent
-#        cp userContent.{{css,js}} $HOME/userContent/
-#        mkdir -vp build/html
-#        rst2html ReadMe.rst build/html/ReadMe.html
-
     - raw:
         xml: |
           <ruby-proxy-object>
@@ -54,15 +48,13 @@
     wrappers:
     - timestamps
     - ansicolor:
-         colormap: css
+         colormap: '{ansi-map}'
 
     publishers:
     - logparser:
-         parse-rules: '{jenkins_home}/log-rules.txt'
+         parse-rules: '{jenkins-home}/{log-rules}'
          unstable-on-warning: true
          fail-on-error: true
-    - jtb-inline-tasks-parser:
-         project-src: '*.styl,*.yaml,Gruntfile.js'
 #    - email:
 #         notify-every-unstable: false
 #         send-to-individuals: true
@@ -74,6 +66,22 @@
          keep-all: false
          allow-missing: false
 
+- job-parts:
+    name: jtb-job-parts
+    description: Build options for use with JTB, XXX: jtb-presets.yaml
+
+    shell-build:
+      - shell: |
+          npm install
+          grunt
+          mkdir -vp $HOME/userContent
+          cp userContent.{{css,js}} $HOME/userContent/
+          mkdir -vp build/html
+          rst2html ReadMe.rst build/html/ReadMe.html
+    tasks-parser:
+      jtb-inline-tasks-parser:
+         project-src: '{project-src}'
+
 
 - project:
     name: Jenkins-userContent
@@ -84,7 +92,7 @@
     - Jenkins/userContent:
         display-name: '{title}'
         git: 'https://github.com/dotmpe/jenkins-userContent.git'
-        branch: 'origin/master'
+        branch: 'master'
         title: 'Jenkins JS/CSS'
         htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
         build-summary-image: ws/logo.png
@@ -92,3 +100,4 @@
         version: 0.0.2
 
 
+# Id: jenkins-userContent/0.0.2-master jenkins-ci.yaml

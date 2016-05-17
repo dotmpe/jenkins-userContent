@@ -1,0 +1,48 @@
+
+# TODO: some way to configure jobs, 
+# - keep variation in templates down
+
+- props: &props
+
+    git: 'https://github.com/dotmpe/jenkins-userContent.git'
+    branch: 'master'
+    title: 'Jenkins JS/CSS'
+    htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
+    build-summary-image: ws/logo.png
+    build-config: jenkins-ci.yaml
+    version: 0.0.2
+
+    project-src: *.styl,*.yaml,Gruntfile.js
+    log-rules: log-rules.txt
+    jenkins-home: /var/lib/jenkins
+    ansi-map: css
+    failure-emailto: dev@dotmpe.com
+
+
+- Jenkins-userContent:
+    source: jenkins-ci.yaml
+
+    Jenkins/userContent:
+      <<: *props
+
+
+- Jenkins/userContent:
+    jtb-version: 0.0.2
+    source: jenkins-ci.yaml
+    build-options:
+    - job-template:logrotate
+    - builders:
+        travis-build:
+          job-template:builders:_2
+        shell-build:
+          job-parts:shell-build
+    - job-template:wrappers::timestamp
+    - job-template:publishers::logparser
+    - job-template:publishers::email
+    - job-template:publishers::html-publisher
+    - job-template:publishers:: job-parts:tasks-parser
+
+    defaults:
+      <<: *props
+    
+# Id: jenkins-userContent/0.0.2-master
