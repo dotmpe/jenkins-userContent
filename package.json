@@ -6,7 +6,8 @@
   "license": "ISC",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "grunt lint"
+    "test": "grunt test",
+    "build": "grunt build"
   },
   "repository": {
     "type": "git",
