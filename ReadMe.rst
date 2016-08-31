@@ -32,11 +32,13 @@ See the build-feature files and Gruntfile, or one of the CI config examples for 
   and files are jshinted and refreshed.
 
 
-Prerequisites:
+Prerequisites for build:
 
 - Node
 - Bats
-- (git-versioning)
+- git-versioning
+- Python docutils
+- uuidgen (uuid-runtime)
 
 
 .. _changelog: ./Changelog.rst

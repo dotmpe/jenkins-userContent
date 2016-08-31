@@ -8,6 +8,14 @@
     jenkins-home: /var/lib/jenkins
     failure-emailto: dev@dotmpe.com
 
+    # Tasks scanner
+    use-stable-build-as-reference: false
+    use-delta-values: false
+    should-detect-modules: false
+    do-not-compute-new: false
+    do-not-resolve-relative-paths: false
+    tasks-file-pattern: '*.styl,*.yaml,Gruntfile.js'
+
 
 - job-template:
     name: 'jnk/userContent'
@@ -36,13 +44,15 @@
         cron: "*/1 * * * *"
 
     builders:
-    - shell: '
-         npm install;
-         grunt;
-         cp userContent.{{css,js}} $JENKINS_HOME/userContent/;
-         mkdir -p build/html;
-         rst2html ReadMe.rst build/html/ReadMe.html;
-       '
+    - shell: |
+         export PATH=$PATH:$HOME/.local/bin
+         Build_Deps_Default_Paths=1 ./install-dependencies.sh git-versioning bats
+         npm install
+         grunt
+         cp userContent.css userContent.js $JENKINS_HOME/userContent/
+         mkdir -p build/html
+         rst2html ReadMe.rst build/html/ReadMe.html
+       
     # FIXME: JJB 1.4.1.dev217 does not create this job correctly with the below raw XML. 
     #- raw:
     #    xml: |
@@ -63,19 +73,61 @@
          parse-rules: '{jenkins-home}/{log-rules}'
          unstable-on-warning: true
          fail-on-error: true
-    - task-scanner:
-         pattern: '*.styl,*.yaml,Gruntfile.js'
-         health-threshold: low
-         can-run-on-failed: true
-         use-stable-build-as-reference: false
-         use-delta-values: false
-         should-detect-modules: false
-         do-not-resolve-relative-paths: true
-         dont-compute-new: true
-    - email:
-         notify-every-unstable: false
-         send-to-individuals: true
-         recipients: '{failure-emailto}'
+    # FIXME: Not in JJB 1.4.1.dev217, task-scanner
+    #- task-scanner:
+    #     pattern: '*.styl,*.yaml,Gruntfile.js'
+    #     health-threshold: low
+    #     can-run-on-failed: true
+    #     use-stable-build-as-reference: false
+    #     use-delta-values: false
+    #     should-detect-modules: false
+    #     do-not-resolve-relative-paths: true
+    #     dont-compute-new: true
+    - conditional-publisher:
+        - condition-kind: shell
+          condition-command: |
+            echo "Tasks-file-pattern: {tasks-file-pattern}"
+            test -n "{tasks-file-pattern}"
+          action:
+          - raw:
+              xml: |
+
+                <hudson.plugins.tasks.TasksPublisher plugin="tasks@4.45">
+                  <healthy/>
+                  <unHealthy/>
+                  <thresholdLimit>low</thresholdLimit>
+                  <pluginName>[TASKS]</pluginName>
+                  <defaultEncoding/>
+                  <canRunOnFailed>true</canRunOnFailed>
+                  <usePreviousBuildAsReference>false</usePreviousBuildAsReference>
+                  <useStableBuildAsReference>{use-stable-build-as-reference}</useStableBuildAsReference>
+                  <useDeltaValues>{use-delta-values}</useDeltaValues>
+                  <thresholds plugin="analysis-core@1.72">
+                    <unstableTotalAll/>
+                    <unstableTotalHigh/>
+                    <unstableTotalNormal/>
+                    <unstableTotalLow/>
+                    <failedTotalAll/>
+                    <failedTotalHigh/>
+                    <failedTotalNormal/>
+                    <failedTotalLow/>
+                  </thresholds>
+                  <shouldDetectModules>{should-detect-modules}</shouldDetectModules>
+                  <dontComputeNew>{do-not-compute-new}</dontComputeNew>
+                  <doNotResolveRelativePaths>{do-not-resolve-relative-paths}</doNotResolveRelativePaths>
+                  <high>FIXME</high>
+                  <normal>TODO</normal>
+                  <low>XXX</low>
+                  <ignoreCase>false</ignoreCase>
+                  <asRegexp>false</asRegexp>
+                  <pattern>{tasks-file-pattern}</pattern>
+                  <excludePattern/>
+                </hudson.plugins.tasks.TasksPublisher>
+    # FIXME: jenkins has no email setup
+    #- email:
+    #     notify-every-unstable: false
+    #     send-to-individuals: true
+    #     recipients: '{failure-emailto}'
     - html-publisher:
          name: 'Project ReadMe'
          dir: build/html/
@@ -113,7 +165,7 @@
         title: 'Jenkins JS/CSS'
         htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
         git: 'https://github.com/dotmpe/jenkins-userContent.git'
-        branch: 'master'
+        branch: 'test'
         build-summary-image: ws/logo.png
         build-config: jenkins-ci.yaml
         version: 0.0.2
