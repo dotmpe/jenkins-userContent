@@ -11,4 +11,6 @@
 
   - TODO: job-parts JTB processer maybe.
 
-
+[0.0.3-dev]
+  - Build config updates.
+  - Added dependency installer script.
