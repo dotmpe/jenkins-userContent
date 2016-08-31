@@ -5,7 +5,7 @@
     :target: https://gemnasium.com/dotmpe/jenkins-userContent
     :alt: Dependencies
 
-  .. image:: https://david-dm.org/dotmpe/jenkins-userContent.svg?style=flat-square
+  .. image:: https://david-dm.org/dotmpe/jenkins-userContent/dev-status.svg?style=flat-square
     :target: https://david-dm.org/dotmpe/jenkins-userContent
     :alt: Dependencies
 
