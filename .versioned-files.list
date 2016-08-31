@@ -4,3 +4,4 @@ build-userContent-js.sh
 script/sh/util.sh
 jenkins-ci.yaml
 jtb-presets.yaml
+install-dependencies.sh

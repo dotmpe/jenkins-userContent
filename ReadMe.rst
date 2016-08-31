@@ -1,5 +1,15 @@
 :Version: 0.0.3-dev
-:Test status:
+:package: Changelog_
+
+  .. image:: https://gemnasium.com/dotmpe/jenkins-userContent.png
+    :target: https://gemnasium.com/dotmpe/jenkins-userContent
+    :alt: Dependencies
+
+  .. image:: https://david-dm.org/dotmpe/jenkins-userContent.svg?style=flat-square
+    :target: https://david-dm.org/dotmpe/jenkins-userContent
+    :alt: Dependencies
+
+:project:
 
   .. image:: https://secure.travis-ci.org/dotmpe/jenkins-userContent.png
     :target: https://travis-ci.org/dotmpe/jenkins-userContent
@@ -28,6 +38,8 @@ Prerequisites:
 - Bats
 - (git-versioning)
 
+
+.. _changelog: ./Changelog.rst
 
 .. Id: jenkins-usercontent/0.0.2-master ReadMe.rst
 
