@@ -1,29 +1,61 @@
 
-/* import bootstrap.css */
-@import 'bootstrap.css';
+if bootstrap-css
+  /* import bootstrap.css */
+  @import 'bootstrap.css';
 
-/* import doony.css */
-@import 'node_modules/doony/doony.css';
+if doony-css
+  /* import doony.css */
+  @import 'node_modules/doony/doony.css';
 
-/* Override bootstrap for monitor view */
-.build-monitor ul#job-views .progress {
-  background-image: none;
-}
+  /* Fix text input heights */
+  textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
 
-/* doony-fix for drop on last build-status page build history */
-#buildHistory .build-row:last-child {
-  display: table-row;
-}
+    height: auto;
+  }
 
-/* doony-fix for main table Saucelab column (and other victims) */
-img {
-  max-width: none;
-}
+if extra-css
 
+  /* Override bootstrap for monitor view */
+  .build-monitor ul#job-views .progress {
+    background-image: none;
+  }
 
-textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+  /* doony-fix for drop on last build-status page build history */
+  #buildHistory .build-row:last-child {
+    display: table-row;
+  }
 
-  height: auto;
-}
+  /* doony-fix for main table Saucelab column (and other victims) */
+  img {
+    max-width: none;
+  }
+
+  /* doony undo hiding of task icons, and suiteable padding */
+  .task a:first-child, .task img {
+    display: inline;
+  }
+  .task a:nth-child(n+1) {
+    padding: 0 30px 0px 0;
+  }
+
+  /* doony fix header size */
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.3em;
+  }
+  h4 {
+    font-size: 1.2em;
+  }
+  h5 {
+    font-size: 1.11em;
+  }
+  h6 {
+    font-size: 1.05em;
+  }
 
 

@@ -1,4 +1,7 @@
 ReadMe.rst
-build-userContent-js.sh
 package.json
+build-userContent-js.sh
+script/sh/util.sh
 jenkins-ci.yaml
+jtb-presets.yaml
+install-dependencies.sh

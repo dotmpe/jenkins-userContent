@@ -1,0 +1,19 @@
+
+- '{name}-gh-travis':
+
+    name: jenkins-userContent
+    disabled: true
+    title: 'Jenkins JS/CSS'
+    build-summary-image: 'ws/logo.png'
+    htmlDescription: |
+      Install user content into userContent dir. After successful build.
+      Make sure ``/userContent/userContent.{css,js}`` are configured with the 
+      Jenkins theme plugin.
+
+    vendor-repo: github
+    vendor-path: dotmpe/jenkins-userContent
+    branch: master
+    project-src: '*.rst,*.styl,*.yaml,*.js'
+    email-individuals: false
+    email-to:
+
