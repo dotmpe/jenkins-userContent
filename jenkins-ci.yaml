@@ -165,10 +165,10 @@
         title: 'Jenkins JS/CSS'
         htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
         git: 'https://github.com/dotmpe/jenkins-userContent.git'
-        branch: 'test'
+        branch: 'master'
         build-summary-image: ws/logo.png
         build-config: jenkins-ci.yaml
-        version: 0.0.2
+        version: 0.0.3-dev # jenkins-userContent
 
 
 # Id: jenkins-userContent/0.0.3-dev jenkins-ci.yaml
