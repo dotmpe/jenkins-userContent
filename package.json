@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "doony": "git://github.com/kevinburke/doony#master",
-    "grunt": "latest",
+    "grunt": "~0.4.1",
     "grunt-contrib-jshint": "latest",
     "grunt-contrib-watch": "latest",
     "grunt-junit-report": "0.0.4",
