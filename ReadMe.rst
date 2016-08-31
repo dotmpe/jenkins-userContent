@@ -1,4 +1,4 @@
-:Version: 0.0.2
+:Version: 0.0.3-dev
 :Test status:
 
   .. image:: https://secure.travis-ci.org/dotmpe/jenkins-userContent.png

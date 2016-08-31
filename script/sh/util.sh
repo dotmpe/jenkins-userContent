@@ -2,7 +2,7 @@
 
 set -e
 
-# Id: jenkins-userContent/0.0.2 script/sh/util.sh
+# Id: jenkins-userContent/0.0.3-dev script/sh/util.sh
 
 
 get_properties()
