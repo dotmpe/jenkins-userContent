@@ -4,7 +4,7 @@ set -e
 
 . ./script/sh/util.sh
 
-# Id: jenkins-userContent/0.0.2-master script/sh/util.sh
+# Id: jenkins-userContent/0.0.2 build-userContent-js.sh
 
 
 id="jenkins-ci.jenkins-usercontent/0.0.2"

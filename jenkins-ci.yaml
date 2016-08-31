@@ -10,7 +10,7 @@
 
 
 - job-template:
-    name: 'Jenkins/userContent'
+    name: 'jnk/userContent'
 
     description:
 
@@ -35,15 +35,16 @@
     - pollscm:
         cron: "*/1 * * * *"
 
-    builders:
-    - raw:
-        xml: |
-          <ruby-proxy-object>
-            <ruby-object ruby-class="Jenkins::Tasks::BuilderProxy" pluginid="travis-yml">
-              <object ruby-class="TravisYmlBuilder" pluginid="travis-yml"/>
-              <pluginid pluginid="travis-yml" ruby-class="String">travis-yml</pluginid>
-            </ruby-object>
-          </ruby-proxy-object>
+    # FIXME: JJB 1.4.1.dev217 does not create this job correctly with the below raw XML. 
+    builders: []
+    #- raw:
+    #    xml: |
+    #      <ruby-proxy-object>
+    #        <ruby-object ruby-class="Jenkins::Tasks::BuilderProxy" pluginid="travis-yml">
+    #          <object ruby-class="TravisYmlBuilder" pluginid="travis-yml"/>
+    #          <pluginid pluginid="travis-yml" ruby-class="String">travis-yml</pluginid>
+    #        </ruby-object>
+    #      </ruby-proxy-object>
 
     wrappers:
     - timestamps
@@ -69,7 +70,8 @@
 
 - job-parts:
     name: jtb-job-parts
-    description: Build options for use with JTB, XXX: jtb-presets.yaml
+    description: |
+      Build options for use with JTB, XXX: jtb-presets.yaml
 
     shell-build:
       - shell: |
@@ -90,7 +92,7 @@
     node: master
 
     jobs:
-    - Jenkins/userContent:
+    - jnk/userContent:
         display-name: '{title}'
         git: 'https://github.com/dotmpe/jenkins-userContent.git'
         branch: 'master'
@@ -101,4 +103,4 @@
         version: 0.0.2
 
 
-# Id: jenkins-userContent/0.0.2-master jenkins-ci.yaml
+# Id: jenkins-userContent/0.0.2 jenkins-ci.yaml

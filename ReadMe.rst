@@ -1,4 +1,4 @@
-:Version: 0.0.2-master
+:Version: 0.0.2
 :Test status:
 
   .. image:: https://secure.travis-ci.org/dotmpe/jenkins-userContent.png
@@ -20,6 +20,13 @@ See the build-feature files and Gruntfile, or one of the CI config examples for 
 
 - To build, jenkins runs `npm` and `grunt` to ensure modules are up to date
   and files are jshinted and refreshed.
+
+
+Prerequisites:
+
+- Node
+- Bats
+- (git-versioning)
 
 
 .. Id: jenkins-usercontent/0.0.2-master ReadMe.rst
