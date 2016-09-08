@@ -3,6 +3,11 @@
 
 # Configuration for containerized test build at travis-ci.org or compatible stacks.
 
+addons:
+  apt:
+    packages:
+    - uuid-runtime
+
 sudo: false
 
 install:
