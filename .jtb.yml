@@ -7,7 +7,7 @@
     build-summary-image: 'ws/logo.png'
     htmlDescription: |
       Install user content into userContent dir. After successful build.
-      Make sure ``/userContent/userContent.{css,js}`` are configured with the 
+      Make sure ``/userContent/userContent.{{css,js}}`` are configured with the 
       Jenkins theme plugin.
 
     vendor-repo: github
