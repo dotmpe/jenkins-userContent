@@ -70,6 +70,12 @@ main_entry()
         install_git_versioning || return $?; }
     ;; esac
 
+  case "$1" in '-' )
+      test -x "$(which uuidgen)" || {
+        cp script/sh/uuidgen.sh $PREFIX/bin/uuidgen
+      }
+    ;; esac
+
   case "$1" in '-'|npm)
       npm install -g grunt-cli
       npm install -g grunt@0.4.1
