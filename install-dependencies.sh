@@ -48,7 +48,11 @@ install_git_versioning()
 {
   req_src_pref
   req_pref
-  git clone https://github.com/dotmpe/git-versioning.git $SRC_PREFIX/git-versioning
+  test -e $SRC_PREFIX/git-versioning && {
+    ( cd $SRC_PREFIX/git-versioning && git checkout master && git pull origin master )
+  } || {
+    git clone https://github.com/dotmpe/git-versioning.git $SRC_PREFIX/git-versioning
+  }
   ( cd $SRC_PREFIX/git-versioning && ./configure.sh $PREFIX && ENV=production ./install.sh )
 }
 

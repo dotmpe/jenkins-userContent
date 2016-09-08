@@ -54,39 +54,7 @@
 
     builders:
     - shell: |
-        echo 1..7 > build.tap
-
-        npm install \
-          && echo "ok 1 - NPM packages installed" >> build.tap \
-          || echo "not ok 1 - Error installing NPM packages" >> build.tap
-
-        bower install
-        echo "ok 2 - Bower packages installed" >> build.tap
-
-        grunt build lint
-        echo "ok 3 - Grunt build+lint OK" >> build.tap
-
-        grunt
-        echo "ok 4 - Grunt finished" >> build.tap
-
-        cp userContent.{{css,js}} /var/lib/jenkins/userContent/
-        rsync -avzui --delete media/ /var/lib/jenkins/userContent/media
-        echo "ok 5 - userContent installed" >> build.tap
-
-        mkdir -p build/html
-        rst2html ReadMe.rst build/html/ReadMe.html
-        echo "ok 6 - Docs generated" >> build.tap
-
-        echo "ok 7 - Build finished" >> build.tap
-
-        # XXX: old, test new stuff
-        #export PATH=$PATH:$HOME/.local/bin
-        #Build_Deps_Default_Paths=1 ./install-dependencies.sh git-versioning bats
-        #npm install
-        #grunt
-        #cp userContent.css userContent.js $JENKINS_HOME/userContent/
-        #mkdir -p build/html
-        #rst2html ReadMe.rst build/html/ReadMe.html
+        ./script/sh/ci.sh
        
     # FIXME: JJB 1.4.1.dev217 does not create this job correctly with the below raw XML. 
     #- raw:
@@ -107,6 +75,7 @@
     - tap:
         results: build.tap
         todo-is-failure: false
+    # XXX: checkstyle-ci
     #- checkstyle-ci:
     #-   cs-unstable-on-total: '{cs-unstable-on-total}'
     - logparser:
