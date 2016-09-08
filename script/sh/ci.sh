@@ -28,7 +28,7 @@ test -w "$HOME/userContent" && {
 } || echo "nok 3 - userContent dir not writable"  >> $report_file
 
 mkdir -p build/html
-rst2html ReadMe.rst build/html/ReadMe.html \
+rst2html.py ReadMe.rst build/html/ReadMe.html \
   && echo "ok 4 - Docs generated" >> $report_file \
   || echo "nok 4 - Docs generation failed" >> $report_file
 
