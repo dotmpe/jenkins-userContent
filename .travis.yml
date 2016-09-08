@@ -9,6 +9,7 @@ install:
 - test -n "$(which stylus)" || npm install -g stylus
 - test -n "$(which recess)" || npm install -g recess
 - test -n "$(which grunt)" || npm install -g grunt grunt-cli
+- test -n "$(which bower)" || npm install -g bower
 # FIXME: New git-versioning
 #- test ! -e $HOME/build/git-versioning || rm -rf $HOME/build/git-versioning
 # XXX: test
