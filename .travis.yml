@@ -36,6 +36,7 @@ script:
 #- echo PATH=$PATH
 - bats --version
 - git-versioning 
+- uuidgen
 - ./script/sh/ci.sh
 
 branches:
