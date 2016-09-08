@@ -3,38 +3,41 @@
 
 # Configuration for containerized test build at travis-ci.org or compatible stacks.
 
+addons:
+  apt:
+    packages:
+    - uuid-runtime
+
 sudo: false
 
 install:
+- echo PATH=$PATH
+- export PATH=$PATH:$HOME/.local/bin
+- echo PATH=$PATH
+
+# XXX: test
+#- mkdir -vp $HOME/build $HOME/.local/{bin,lib}
+
 - test -n "$(which stylus)" || npm install -g stylus
 - test -n "$(which recess)" || npm install -g recess
 - test -n "$(which grunt)" || npm install -g grunt grunt-cli
-# FIXME: New git-versioning
-#- test ! -e $HOME/build/git-versioning || rm -rf $HOME/build/git-versioning
-# XXX: test
-#- mkdir -vp $HOME/build $HOME/.local/{bin,lib}
-#- git clone https://github.com/dotmpe/git-versioning.git $HOME/build/git-versioning
-#- echo PATH=$PATH
-#- export PATH=$PATH:$HOME/.local/bin
-#- echo PATH=$PATH
-#- test -n "$(which git-versioning)" || ( cd $HOME/build/git-versioning && ./configure.sh $HOME/.local && ENV=production ./install.sh )
+- test -n "$(which bower)" || npm install -g bower
+
 - npm install
+
 - pip install --user docutils
 
+- git clean -df
+
 script:
-#- grunt shell:generateFeatures -env=$ENV --features="bootstrap-css doony-css extra-css doony-js extra-js"
 #- grunt --env=$ENV
 #- echo PATH=$PATH
 #- export PATH=$PATH:$HOME/.local/bin
 #- echo PATH=$PATH
-#- git clean -df
-#- which bats && grunt || grunt build jshint:all shell:version-check
-- test -w "$HOME/userContent" && { cp -v userContent.{css,js} $HOME/userContent/; } || echo "Note userContent is not writable, no files installed"
-- mkdir -vp build/html
-- rst2html.py ReadMe.rst build/html/ReadMe.html
+- ./script/sh/ci.sh
 
 branches:
   only:
-  - test
+  - '/.*test$/'
   - '/^[0-9]*\.[0-9]*\.[0-9]*/'
 
