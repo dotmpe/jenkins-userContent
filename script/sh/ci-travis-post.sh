@@ -1,6 +1,6 @@
 #!/bin/sh
 
-grep ^nok build.tap && {
+grep '^nok' build.tap && {
   echo "Errors in build"
   exit 1
 } || {
