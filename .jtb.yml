@@ -1,4 +1,7 @@
 
+# XXX: Jenkins 2.0 is somehow no longer accepting Travis builder block. See JTB
+# issues.
+
 - '{name}-gh-travis':
 
     name: jenkins-userContent
@@ -16,4 +19,7 @@
     project-src: '*.rst,*.styl,*.yaml,*.js'
     email-individuals: false
     email-to:
+
+    # FIXME: bug in JTB? causes std_bats_publisher included (from {name}-local-gh-bats??)
+    publishers: []
 
