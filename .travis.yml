@@ -38,6 +38,8 @@ script:
 - git-versioning 
 - uuidgen
 - ./script/sh/ci.sh
+- ./script/sh/ci-travis-post.sh
+- grep ^nok build.tap && 
 
 branches:
   only:
