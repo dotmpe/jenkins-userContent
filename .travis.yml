@@ -31,9 +31,11 @@ install:
 
 script:
 #- grunt --env=$ENV
-#- echo PATH=$PATH
+- echo PATH=$PATH
 #- export PATH=$PATH:$HOME/.local/bin
 #- echo PATH=$PATH
+- bats --version
+- git-versioning 
 - ./script/sh/ci.sh
 
 branches:
