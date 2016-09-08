@@ -13,6 +13,7 @@
   "eqnull": true,
   "node": true,
   "predef": [
-     "window"
+     "document", "window", "Handlebars", "jQuery",
+     "JSONEditor"
   ]
 }

@@ -1,3 +1,6 @@
 node_modules/
 *.css
 brixadmin
+bower_components
+build
+build.xml

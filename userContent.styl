@@ -9,8 +9,37 @@ if doony-css
 
   /* Fix text input heights */
   textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-
     height: auto;
+  }
+
+if jsonview-css
+
+  @import 'bower_components/jquery-jsonview/dist/jquery.jsonview.css'
+  
+  /** Hacks for bootstrap use and styling of JSON-editor bundled with Extended
+   * Choice Parameter plugin */
+  
+  td.setting-main div[name=parameter] .container-fluid {
+    padding: 0;
+  }
+  
+  /* Output uses .well and .well-small together, so .well overrules. facepalm. */
+  td.setting-main div[name=parameter] .well {
+      padding: 9px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+  }
+  
+  td.setting-main div[name=parameter] h3 {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+  
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
   }
 
 if extra-css

@@ -1,5 +1,7 @@
 ReadMe.rst
+package.yml
 package.json
+bower.json
 build-userContent-js.sh
 script/sh/util.sh
 jenkins-ci.yaml

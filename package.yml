@@ -1,0 +1,31 @@
+
+# Project package metadata file 
+# (github:dotmpe/script-mpe/schema/package.yml)
+
+- id: jenkins-userContent
+  main: jenkins-userContent
+  version: 0.0.3-dev # jenkins-userContent
+  environments: ['dev']
+
+  # TODO: testing NPM scripts
+  init:
+   #- Build_Deps_Default_Paths=1 ./install-dependencies.sh -
+   - npm install
+   #- bower install
+  check:
+   - grunt check
+  build:
+   - grunt build
+  test:
+   - grunt test
+
+  # XXX: new package schema?
+  pd-meta:
+    npm:
+      test:
+        - pd:check
+        - pd:test
+      install:
+        - pd:check
+        - pd:test
+

@@ -1,5 +1,6 @@
 'use strict';
 
+var util = require('util');
 var fs = require('fs');
 
 
@@ -16,6 +17,8 @@ module.exports = function(grunt) {
   } else {
     features_file = features_defaults_file;
   }
+
+  grunt.log.write(util.format("Set env '%s', using features from '%s'", env, features_file));
 
   // FIXME: feature compilation
   //var features = grunt.option('features') || 'doony-js extra-js';
@@ -59,13 +62,16 @@ module.exports = function(grunt) {
       "bats-test": {
         command: 'bats ./test/*-spec.bats'
       },
+      "jjb-check": {
+        command: 'jenkins-jobs test jenkins-ci.yaml > jenkins-ci.xml'
+      },
       "version-check": {
         command: 'git-versioning check'
       },
       // TODO: generateFeatures
-      generateFeatures: {
-        command: 'node ./gen-features.js > '+ build_features_file
-      },
+      //generateFeatures: {
+      //  command: 'node ./gen-features.js > '+ build_features_file
+      //},
       bootstrapCss: {
         command: 'recess --compile node_modules/twitter-bootstrap/less/bootstrap.less > bootstrap.css'
       },
@@ -103,9 +109,17 @@ module.exports = function(grunt) {
   // auto load grunt contrib tasks from package.json
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('test', [
-    'jshint:all',
+  grunt.registerTask('lint', [
+    'jshint:all'
+  ]);
+
+  grunt.registerTask('check', [
     'shell:version-check',
+    //'shell:jjb-check',
+    'lint'
+  ]);
+
+  grunt.registerTask('test', [
     'shell:bats-test'
   ]);
 
@@ -118,7 +132,8 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', [
     'build',
-    'test',
+    'check',
+    'test'
   ]);
 
 };

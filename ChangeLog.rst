@@ -14,3 +14,11 @@
 [0.0.3-dev]
   - Build config updates.
   - Added dependency installer script.
+  - Restructured Grunt targets a bit, main targets are now "check build test".
+  - Added generic package.yml metadata.
+
+  - TODO: test npm install script hooks.
+  - FIXME: JJB test not working at jenkins.
+  - FIXME: pre-install deps will not work at jenkins without sudo/permissions in
+    /usr/local
+

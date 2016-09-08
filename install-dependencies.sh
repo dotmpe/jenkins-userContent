@@ -11,22 +11,29 @@ test -z "$Build_Deps_Default_Paths" || {
 
 test -n "$sudo" || sudo=
 
-test -n "$SRC_PREFIX" || {
-  echo "Not sure where checkout"
-  exit 1
+req_src_pref()
+{
+  test -n "$SRC_PREFIX" || {
+    echo "Not sure where checkout"
+    exit 1
+  }
+  test -d $SRC_PREFIX || ${sudo} mkdir -vp $SRC_PREFIX
 }
 
-test -n "$PREFIX" || {
-  echo "Not sure where to install"
-  exit 1
+req_pref()
+{
+  test -n "$PREFIX" || {
+    echo "Not sure where to install"
+    exit 1
+  }
+
+  test -d $PREFIX || ${sudo} mkdir -vp $PREFIX
 }
-
-test -d $SRC_PREFIX || ${sudo} mkdir -vp $SRC_PREFIX
-test -d $PREFIX || ${sudo} mkdir -vp $PREFIX
-
 
 install_bats()
 {
+  req_src_pref
+  req_pref
   echo "Installing bats"
   local pwd=$(pwd)
   mkdir -vp $SRC_PREFIX
@@ -39,6 +46,8 @@ install_bats()
 
 install_git_versioning()
 {
+  req_src_pref
+  req_pref
   git clone https://github.com/dotmpe/git-versioning.git $SRC_PREFIX/git-versioning
   ( cd $SRC_PREFIX/git-versioning && ./configure.sh $PREFIX && ENV=production ./install.sh )
 }
@@ -55,6 +64,14 @@ main_entry()
   case "$1" in '-'|dev|build|check|test|git-versioning )
       test -x "$(which git-versioning)" || {
         install_git_versioning || return $?; }
+    ;; esac
+
+  case "$1" in '-'|npm)
+      npm install -g grunt-cli
+      npm install -g grunt@0.4.1
+      npm install -g bower
+      npm install -g recess
+      npm install -g stylus
     ;; esac
 
   echo "OK. All pre-requisites for '$1' checked"

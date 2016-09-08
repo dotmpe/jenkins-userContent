@@ -1,13 +1,40 @@
+<div id="jenkins-ci-description" class="well">
+  <div class="row">
 
-<div class="well">CSS/JS for Jenkins CI server UI. See Gruntfile for build.
-  
-  <a href='ws/build/html/ReadMe.html'>ReadMe</a>.
+    <div class="col-md-4" >
+      <img width="100%" src="{build-summary-image}" /></div>
+    <div class="col-md-9" >
+{htmlDescription} </div> 
+    <div class="col-md-11" >
 
-  Version: {version}. 
+      <table class="table table-condensed">
 
+        <tr>
+          <th>GIT:</th> 
+          <td> <small><code class="muted"
+>{git}</code></small>
+<code>{branch}</code> </td> 
+        </tr>
+        <tr>
+          <th>Template:</th> 
+          <td> <code class="muted">&lt;custom-git-job&gt;</code></td> 
+        </tr>
+        <tr>
+          <th>Version:</th> 
+          <td>{version}</td> 
+        </tr>
+</table>
+
+    </div> 
+  </div>
 </div>
 
 <div class="alert alert-info center" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign"
+      aria-hidden="true"></span>
   <div> Do not edit this job through the web! </div>
+  <small>The <a href="./config.xml">settings</a> are in 
+    <a href="./ws/{build-config}">{build-config}</a></code>. 
+  </small>
 </div>
 

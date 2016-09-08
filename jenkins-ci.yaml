@@ -8,6 +8,12 @@
     jenkins-home: /var/lib/jenkins
     failure-emailto: dev@dotmpe.com
 
+    # Log parser
+    log-rules: '{log-rules}'
+
+    node: master
+    title: 'Jenkins JS/CSS'
+
     # Tasks scanner
     use-stable-build-as-reference: false
     use-delta-values: false
@@ -20,7 +26,9 @@
 - job-template:
     name: 'jnk/userContent'
 
-    description:
+    description: !include-raw .jenkins-description.html
+
+    node: master
 
     logrotate:
        daysToKeep: 7
@@ -38,6 +46,7 @@
           recursive: true
         skip-tag: true
         wipe-workspace: false
+        credentials-id: '{credentials-id}'
 
     triggers:
     - pollscm:
@@ -45,13 +54,39 @@
 
     builders:
     - shell: |
-         export PATH=$PATH:$HOME/.local/bin
-         Build_Deps_Default_Paths=1 ./install-dependencies.sh git-versioning bats
-         npm install
-         grunt
-         cp userContent.css userContent.js $JENKINS_HOME/userContent/
-         mkdir -p build/html
-         rst2html ReadMe.rst build/html/ReadMe.html
+        echo 1..7 > build.tap
+
+        npm install \
+          && echo "ok 1 - NPM packages installed" >> build.tap \
+          || echo "not ok 1 - Error installing NPM packages" >> build.tap
+
+        bower install
+        echo "ok 2 - Bower packages installed" >> build.tap
+
+        grunt build lint
+        echo "ok 3 - Grunt build+lint OK" >> build.tap
+
+        grunt
+        echo "ok 4 - Grunt finished" >> build.tap
+
+        cp userContent.{{css,js}} /var/lib/jenkins/userContent/
+        rsync -avzui --delete media/ /var/lib/jenkins/userContent/media
+        echo "ok 5 - userContent installed" >> build.tap
+
+        mkdir -p build/html
+        rst2html ReadMe.rst build/html/ReadMe.html
+        echo "ok 6 - Docs generated" >> build.tap
+
+        echo "ok 7 - Build finished" >> build.tap
+
+        # XXX: old, test new stuff
+        #export PATH=$PATH:$HOME/.local/bin
+        #Build_Deps_Default_Paths=1 ./install-dependencies.sh git-versioning bats
+        #npm install
+        #grunt
+        #cp userContent.css userContent.js $JENKINS_HOME/userContent/
+        #mkdir -p build/html
+        #rst2html ReadMe.rst build/html/ReadMe.html
        
     # FIXME: JJB 1.4.1.dev217 does not create this job correctly with the below raw XML. 
     #- raw:
@@ -66,13 +101,18 @@
     wrappers:
     - timestamps
     - ansicolor:
-         colormap: '{ansi-map}'
+        colormap: '{ansi-map}'
 
     publishers:
+    - tap:
+        results: build.tap
+        todo-is-failure: false
+    #- checkstyle-ci:
+    #-   cs-unstable-on-total: '{cs-unstable-on-total}'
     - logparser:
-         parse-rules: '{jenkins-home}/{log-rules}'
-         unstable-on-warning: true
-         fail-on-error: true
+        parse-rules: '{jenkins-home}/{log-rules}'
+        unstable-on-warning: true
+        fail-on-error: true
     # FIXME: Not in JJB 1.4.1.dev217, task-scanner
     #- task-scanner:
     #     pattern: '*.styl,*.yaml,Gruntfile.js'
@@ -83,6 +123,16 @@
     #     should-detect-modules: false
     #     do-not-resolve-relative-paths: true
     #     dont-compute-new: true
+    # XXX: tasks parser in Ba
+    #- inline-tasks-parser:
+    #    pattern: '{tasks-file-pattern}'
+    #    health-threshold: low
+    #    can-run-on-failed: true
+    #    use-stable-build-as-reference: false
+    #    use-delta-values: false
+    #    should-detect-modules: false
+    #    do-not-resolve-relative-paths: true
+    #    dont-compute-new: true
     - conditional-publisher:
         - condition-kind: shell
           condition-command: |
@@ -129,11 +179,31 @@
     #     send-to-individuals: true
     #     recipients: '{failure-emailto}'
     - html-publisher:
-         name: 'Project ReadMe'
-         dir: build/html/
-         files: ReadMe.html
-         keep-all: false
-         allow-missing: false
+        name: 'Project ReadMe'
+        dir: build/html/
+        files: ReadMe.html
+        keep-all: false
+        allow-missing: false
+    - cigame
+    - claim-build
+
+
+- job-parts:
+    name: jtb-job-parts
+    description: |
+      Build options for use with JTB, XXX: jtb-presets.yaml
+
+    shell-build:
+      - shell: |
+          npm install
+          grunt
+          mkdir -vp $HOME/userContent
+          cp userContent.{{css,js}} $HOME/userContent/
+          mkdir -vp build/html
+          rst2html ReadMe.rst build/html/ReadMe.html
+    tasks-parser:
+      jtb-inline-tasks-parser:
+         project-src: '{project-src}'
 
 
 - job-parts:
@@ -163,8 +233,13 @@
     - jnk/userContent:
         display-name: '{title}'
         title: 'Jenkins JS/CSS'
-        htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
+        htmlDescription: |
+          CSS/JS for Jenkins CI server UI. <ul>
+          <li><a href='ws/build/html/ReadMe.html'>ReadMe</a></li>
+          </ul>
         git: 'https://github.com/dotmpe/jenkins-userContent.git'
+        credentials-id: '{credentials-id}'
+        title: '{title}'
         branch: 'master'
         build-summary-image: ws/logo.png
         build-config: jenkins-ci.yaml

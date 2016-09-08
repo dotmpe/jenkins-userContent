@@ -31,10 +31,12 @@ See the build-feature files and Gruntfile, or one of the CI config examples for 
 - To build, jenkins runs `npm` and `grunt` to ensure modules are up to date
   and files are jshinted and refreshed.
 
+- Added Handlebars templater to client-side libraries.
+
 
 Prerequisites for build:
 
-- Node
+- Node, NPM
 - Bats
 - git-versioning
 - Python docutils

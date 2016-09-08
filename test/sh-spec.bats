@@ -36,7 +36,7 @@ EOF
 @test "Features are correctly parsed to a string - defaults" {
   build_features="$(echo $(get_properties < default-features.properties))"
   #echo $build_features > build_features.str
-  test "$build_features" = "bootstrap-css doony-css extra-css doony-js extra-js"
+  test "$build_features" = "bootstrap-css doony-css extra-css jsonview-css extra-js"
 }
 
 #@test "Features are correctly parsed to a string - generated" {

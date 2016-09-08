@@ -7,7 +7,7 @@ set -e
 # Id: jenkins-userContent/0.0.3-dev build-userContent-js.sh
 
 
-id="jenkins-ci.jenkins-usercontent/0.0.2"
+id="jenkins-ci.jenkins-usercontent/0.0.3-dev"
 out=userContent.js
 date=`date`
 
@@ -26,4 +26,21 @@ case " $build_features " in *" doony-js "* )
 case " $build_features " in *" extra-js "* )
   cat extras.js >> $out
 ;; esac
+
+# Update JSON-editor behaviour
+cat jenkins-json-param-editor.js >> $out
+
+echo "/* jshint ignore:start */" >>$out
+
+#cat bower_components/underscore/underscore-min.js >> $out
+
+cat bower_components/jquery-jsonview/dist/jquery.jsonview.js >>$out
+
+#cat bower_components/handlebars/handlebars. >>$out
+cat bower_components/handlebars.js/dist/handlebars.js >>$out
+echo "/* jshint ignore:end */" >>$out
+
+#cat bower_components/handlebars-helpers/src/helpers.js >>$out
+
+cat hbs-replace.js >>$out
 
