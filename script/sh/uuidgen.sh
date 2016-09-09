@@ -2,7 +2,6 @@
 
 set -e
 
-
 case "$(uname)" in Darwin )
     LANG=C LC_CTYPE=C
   ;;
