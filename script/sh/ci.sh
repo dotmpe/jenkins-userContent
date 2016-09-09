@@ -17,15 +17,19 @@ grunt check test \
   && echo "ok 2 - Grunt check+test" >> $report_file \
   || echo "nok 2 - Grunt check+test" >> $report_file
 
-test -w "$HOME/userContent" && {
+test -n "$Update_userContent" && {
+  test -w "$HOME/userContent" && {
 
-  {
-    cp userContent.{css,js} /var/lib/jenkins/userContent/
-    rsync -avzui --delete media/ /var/lib/jenkins/userContent/media
-  } && echo "ok 3 - userContent updated" >> $report_file \
-    || echo "nok 3 - userContent update failed" >> $report_file
+    {
+      cp userContent.{css,js} /var/lib/jenkins/userContent/
+      rsync -avzui --delete media/ /var/lib/jenkins/userContent/media
+    } && echo "ok 3 - userContent updated" >> $report_file \
+      || echo "nok 3 - userContent update failed" >> $report_file
 
-} || echo "nok 3 - userContent dir not writable"  >> $report_file
+  } || echo "nok 3 - userContent dir not writable"  >> $report_file
+} || {
+  echo "ok 3 # skipped: userContent update"  >> $report_file
+}
 
 mkdir -p build/html
 rst2html.py ReadMe.rst build/html/ReadMe.html \
