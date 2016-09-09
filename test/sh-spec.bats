@@ -5,7 +5,8 @@ base=$(basename $0 .bats)
 . ./script/sh/util.sh
 
 @test "Features are correctly parsed to a string - I" {
-  TMP=/tmp/$(uuidgen)
+
+  TMP=/tmp/$(./script/ci/uuidgen.sh)
   diag "TMP=$TMP"
 
 #  {
