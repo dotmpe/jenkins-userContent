@@ -54,6 +54,7 @@
 
     builders:
     - shell: |
+        export PATH=$PATH:~/.local/bin
         bats --version
         git-versioning 
         ./script/sh/ci.sh
