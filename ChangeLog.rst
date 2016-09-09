@@ -11,7 +11,7 @@
 
   - TODO: job-parts JTB processer maybe.
 
-[0.0.3-dev]
+0.0.3
   - Build config updates.
   - Added dependency installer script.
   - Restructured Grunt targets a bit, main targets are now "check build test".

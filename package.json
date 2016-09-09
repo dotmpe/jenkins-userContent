@@ -1,7 +1,7 @@
 {
   "name": "jenkins-userContent-mpe",
   "description": "CSS/JS for jenkins",
-  "version": "0.0.3-dev",
+  "version": "0.0.3",
   "author": "",
   "license": "ISC",
   "main": "Gruntfile.js",

@@ -95,4 +95,4 @@ test "$(basename $0)" = "install-dependencies.sh" && {
   done
 } || printf ""
 
-# Id: jenkins-userContent/0.0.3-dev install-dependencies.sh
+# Id: jenkins-userContent/0.0.3 install-dependencies.sh

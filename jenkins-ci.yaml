@@ -212,7 +212,7 @@
         branch: 'master'
         build-summary-image: ws/logo.png
         build-config: jenkins-ci.yaml
-        version: 0.0.3-dev # jenkins-userContent
+        version: 0.0.3 # jenkins-userContent
 
 
-# Id: jenkins-userContent/0.0.3-dev jenkins-ci.yaml
+# Id: jenkins-userContent/0.0.3 jenkins-ci.yaml

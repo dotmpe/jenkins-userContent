@@ -10,7 +10,7 @@
     htmlDescription: "CSS/JS for Jenkins CI server UI. <a href='ws/build/html/ReadMe.html'>ReadMe</a>."
     build-summary-image: ws/logo.png
     build-config: jenkins-ci.yaml
-    version: 0.0.2
+    version: 0.0.3 # jenkins-userContent
 
     project-src: *.styl,*.yaml,Gruntfile.js
     log-rules: log-rules.txt
@@ -27,7 +27,7 @@
 
 
 - Jenkins/userContent:
-    jtb-version: 0.0.2
+    jtb-version: 0.0.3 # jenkins-userContent
     source: jenkins-ci.yaml
     build-options:
     - job-template:logrotate
@@ -45,4 +45,4 @@
     defaults:
       <<: *props
     
-# Id: jenkins-userContent/0.0.3-dev jtb-presets.yaml
+# Id: jenkins-userContent/0.0.3 jtb-presets.yaml
