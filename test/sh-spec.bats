@@ -5,6 +5,8 @@ base=$(basename $0 .bats)
 . ./script/sh/util.sh
 
 @test "UUID gen. Sh" {
+  test -e /dev/urandom
+  diag "$(hostname)"
   run ./script/sh/uuidgen.sh
   test ${status} -eq 0 || {
     diag "Output (${#lines[*]} lines): ${lines[*]}"
