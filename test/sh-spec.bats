@@ -4,9 +4,20 @@ base=$(basename $0 .bats)
 
 . ./script/sh/util.sh
 
+@test "UUID gen. Sh" {
+  run ./script/sh/uuidgen.sh
+  test ${status} -eq 0 || {
+    diag "Output (${#lines[*]} lines): ${lines[*]}"
+    fail "Returned: ${status}"
+  }
+  test ${#lines[*]} -eq 1 || {
+    fail "Output (${#lines[*]} lines): ${lines[*]}"
+  }
+}
+
 @test "Features are correctly parsed to a string - I" {
 
-  TMP=/tmp/$(./script/sh/uuidgen.sh)
+  #TMP=/tmp/$(./script/sh/uuidgen.sh)
   diag "TMP=$TMP"
 
 #  {
