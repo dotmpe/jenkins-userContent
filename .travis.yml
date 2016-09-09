@@ -38,6 +38,8 @@ script:
 - git-versioning 
 - uuidgen
 - ./script/sh/ci.sh
+- grep '^nok' build.tap && { echo "Errors in build"; exit 1; } || { echo "No errors in build"; }
+#- ./script/sh/ci-travis-post.sh
 
 branches:
   only:

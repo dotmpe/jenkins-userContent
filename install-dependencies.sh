@@ -48,7 +48,11 @@ install_git_versioning()
 {
   req_src_pref
   req_pref
-  git clone https://github.com/dotmpe/git-versioning.git $SRC_PREFIX/git-versioning
+  test -e $SRC_PREFIX/git-versioning && {
+    ( cd $SRC_PREFIX/git-versioning && git checkout master && git pull origin master )
+  } || {
+    git clone https://github.com/dotmpe/git-versioning.git $SRC_PREFIX/git-versioning
+  }
   ( cd $SRC_PREFIX/git-versioning && ./configure.sh $PREFIX && ENV=production ./install.sh )
 }
 
@@ -64,6 +68,12 @@ main_entry()
   case "$1" in '-'|dev|build|check|test|git-versioning )
       test -x "$(which git-versioning)" || {
         install_git_versioning || return $?; }
+    ;; esac
+
+  case "$1" in '-' )
+      test -x "$(which uuidgen)" || {
+        cp script/sh/uuidgen.sh $PREFIX/bin/uuidgen
+      }
     ;; esac
 
   case "$1" in '-'|npm)

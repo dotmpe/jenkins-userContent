@@ -7,11 +7,13 @@
   version: 0.0.3-dev # jenkins-userContent
   environments: ['dev']
 
-  # TODO: testing NPM scripts
   init:
-   #- Build_Deps_Default_Paths=1 ./install-dependencies.sh -
    - npm install
+   # Which equals:
+   #- Build_Deps_Default_Paths=1 ./install-dependencies.sh -
+   #- npm install
    #- bower install
+   #- grunt build
   check:
    - grunt check
   build:
