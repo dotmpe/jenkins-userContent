@@ -54,6 +54,8 @@
 
     builders:
     - shell: |
+        bats --version
+        git-versioning 
         ./script/sh/ci.sh
        
     # FIXME: JJB 1.4.1.dev217 does not create this job correctly with the below raw XML. 
@@ -175,26 +177,10 @@
          project-src: '{project-src}'
 
 
-- job-parts:
-    name: jtb-job-parts
-    description: |
-      Build options for use with JTB, XXX: jtb-presets.yaml
-
-    shell-build:
-      - shell: |
-          npm install
-          grunt
-          mkdir -vp $HOME/userContent
-          cp userContent.{{css,js}} $HOME/userContent/
-          mkdir -vp build/html
-          rst2html ReadMe.rst build/html/ReadMe.html
-    tasks-parser:
-      jtb-inline-tasks-parser:
-         project-src: '{project-src}'
-
-
 - project:
     name: Jenkins-userContent
+
+    defaults: globals
 
     node: master
 

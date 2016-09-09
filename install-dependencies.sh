@@ -77,11 +77,10 @@ main_entry()
     ;; esac
 
   case "$1" in '-'|npm)
-      npm install -g grunt-cli
-      npm install -g grunt@0.4.1
-      npm install -g bower
-      npm install -g recess
-      npm install -g stylus
+      test -n "$(which stylus)" || npm install -g stylus;
+      test -n "$(which recess)" || npm install -g recess;
+      test -n "$(which grunt)" || npm install -g grunt@0.4.1 grunt-cli;
+      test -n "$(which bower)" || npm install -g bower;
     ;; esac
 
   echo "OK. All pre-requisites for '$1' checked"

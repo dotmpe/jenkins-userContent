@@ -1,6 +1,5 @@
-node_modules/
 *.css
-brixadmin
+userContent.*
+node_modules
 bower_components
 build
-build.xml

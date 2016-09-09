@@ -3,11 +3,6 @@
 
 # Configuration for containerized test build at travis-ci.org or compatible stacks.
 
-addons:
-  apt:
-    packages:
-    - uuid-runtime
-
 sudo: false
 
 install:
@@ -18,11 +13,6 @@ install:
 # XXX: test
 #- mkdir -vp $HOME/build $HOME/.local/{bin,lib}
 
-- test -n "$(which stylus)" || npm install -g stylus
-- test -n "$(which recess)" || npm install -g recess
-- test -n "$(which grunt)" || npm install -g grunt grunt-cli
-- test -n "$(which bower)" || npm install -g bower
-
 - npm install
 
 - pip install --user docutils
@@ -32,14 +22,11 @@ install:
 script:
 #- grunt --env=$ENV
 - echo PATH=$PATH
-#- export PATH=$PATH:$HOME/.local/bin
-#- echo PATH=$PATH
 - bats --version
 - git-versioning 
 - uuidgen
 - ./script/sh/ci.sh
 - grep '^nok' build.tap && { echo "Errors in build"; exit 1; } || { echo "No errors in build"; }
-#- ./script/sh/ci-travis-post.sh
 
 branches:
   only:

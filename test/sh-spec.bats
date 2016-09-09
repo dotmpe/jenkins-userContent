@@ -20,8 +20,9 @@ base=$(basename $0 .bats)
 
 @test "Features are correctly parsed to a string - I" {
 
-  TMP=/tmp/123
-  # FIXME: $(./script/sh/uuidgen.sh)
+  TMP=/tmp/jtb-test-sh-spec-1
+  # FIXME: $(./script/sh/uuidgen.sh) not functional at Travis, is cat
+  # /dev/urandom working there? NB. uuid-runtime is not apt whitelisted.
   {
     cat <<EOF
       foo: true
