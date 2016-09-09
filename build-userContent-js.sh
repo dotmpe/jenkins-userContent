@@ -4,10 +4,10 @@ set -e
 
 . ./script/sh/util.sh
 
-# Id: jenkins-userContent/0.0.3 build-userContent-js.sh
+# Id: jenkins-userContent/0.0.4-dev build-userContent-js.sh
 
 
-id="jenkins-ci.jenkins-usercontent/0.0.3"
+id="jenkins-ci.jenkins-usercontent/0.0.4-dev"
 out=userContent.js
 date=`date`
 

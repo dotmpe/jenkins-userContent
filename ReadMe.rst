@@ -1,4 +1,4 @@
-:Version: 0.0.3
+:Version: 0.0.4-dev
 :package: Changelog_
 
   .. image:: https://gemnasium.com/dotmpe/jenkins-userContent.png
@@ -45,4 +45,4 @@ Prerequisites for build:
 
 .. _changelog: ./Changelog.rst
 
-.. Id: jenkins-usercontent/0.0.3 ReadMe.rst
+.. Id: jenkins-usercontent/0.0.4-dev ReadMe.rst

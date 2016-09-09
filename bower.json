@@ -1,7 +1,7 @@
 {
   "name": "jenkins-userContent",
   "description": "CSS/JS for jenkins",
-  "version": "0.0.3",
+  "version": "0.0.4-dev",
   "main": "Gruntfile.js",
   "author": "",
   "license": "ISC",

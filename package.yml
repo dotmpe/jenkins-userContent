@@ -4,7 +4,7 @@
 
 - id: jenkins-userContent
   main: jenkins-userContent
-  version: 0.0.3 # jenkins-userContent
+  version: 0.0.4-dev # jenkins-userContent
   environments: ['dev']
 
   init:
