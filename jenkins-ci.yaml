@@ -54,10 +54,10 @@
 
     builders:
     - shell: |
-        export PATH=$PATH:~/.local/bin
+        export PATH=$PATH:$HOME/.local/bin
         bats --version
         git-versioning 
-        ./script/sh/ci.sh
+        bash ./script/sh/ci.sh
        
     # FIXME: JJB 1.4.1.dev217 does not create this job correctly with the below raw XML. 
     #- raw:
