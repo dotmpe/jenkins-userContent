@@ -65,7 +65,7 @@
 
         # Actual build
         export Update_userContent=1
-        bash ./script/sh/ci.sh
+        ./script/sh/ci.sh
        
     # FIXME: JJB 1.4.1.dev217 does not create Travis job correctly with the below raw XML. 
     #- raw:
