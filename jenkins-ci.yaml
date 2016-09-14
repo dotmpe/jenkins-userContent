@@ -54,12 +54,16 @@
 
     builders:
     - shell: |
+        # Pre-requisites
         export PATH=$HOME/.local/bin:$HOME/.basher/bin:$PATH
         which rst2html.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
+        Build_Deps_Default_Paths=1 ./install-dependencies.sh -
         grunt --version
         rst2html --version
         bats --version
         git-versioning 
+
+        # Actual build
         export Update_userContent=1
         bash ./script/sh/ci.sh
        
@@ -170,19 +174,24 @@
       Build options for use with JTB, XXX: jtb-presets.yaml
 
     shell-build:
-      - shell: |
-          export PATH=$HOME/.local/bin:$HOME/.basher/bin:$PATH
-          which rst2html.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
-          grunt --version
-          rst2html --version
-          bats --version
-          git-versioning 
-          npm install
-          grunt
-          mkdir -vp $HOME/userContent
-          cp userContent.{{css,js}} $HOME/userContent/
-          mkdir -vp build/html
-          rst2html ReadMe.rst build/html/ReadMe.html
+    - shell: |
+        # Pre-requisites
+        export PATH=$HOME/.local/bin:$HOME/.basher/bin:$PATH
+        which rst2html.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
+        Build_Deps_Default_Paths=1 ./install-dependencies.sh -
+        grunt --version
+        rst2html --version
+        bats --version
+        git-versioning 
+
+        # Actual build
+        npm install
+        grunt
+        mkdir -vp $HOME/userContent
+        cp userContent.{{css,js}} $HOME/userContent/
+        mkdir -vp build/html
+        rst2html ReadMe.rst build/html/ReadMe.html
+
     tasks-parser:
       jtb-inline-tasks-parser:
          project-src: '{project-src}'
