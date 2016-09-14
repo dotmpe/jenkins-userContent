@@ -18,11 +18,13 @@ grunt check test \
   || echo "not ok 2 Grunt check+test" >> $report_file
 
 test -n "$Update_userContent" && {
+  test -e "$HOME/userContent" || mkdir $HOME/userContent
   test -w "$HOME/userContent" && {
 
     {
-      cp userContent.{css,js} /var/lib/jenkins/userContent/
-      rsync -avzui --delete media/ /var/lib/jenkins/userContent/media
+      cp userContent.css $HOME/userContent/
+      cp userContent.js $HOME/userContent/
+      rsync -avzui --delete media/ $HOME/userContent/media
     } && echo "ok 3 userContent synced" >> $report_file \
       || echo "not ok 3 userContent sync failed" >> $report_file
 

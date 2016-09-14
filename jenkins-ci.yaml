@@ -55,7 +55,7 @@
     builders:
     - shell: |
         export PATH=$HOME/.local/bin:$HOME/.basher/bin:$PATH
-        which rst2hml.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
+        which rst2html.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
         grunt --version
         rst2html --version
         bats --version
@@ -172,7 +172,7 @@
     shell-build:
       - shell: |
           export PATH=$HOME/.local/bin:$HOME/.basher/bin:$PATH
-          which rst2hml.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
+          which rst2html.py > /dev/null 2>&1 && alias rst2html=rst2html.py || printf ""
           grunt --version
           rst2html --version
           bats --version
