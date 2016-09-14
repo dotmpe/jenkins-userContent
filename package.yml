@@ -7,6 +7,7 @@
   version: 0.0.4-dev # jenkins-userContent
   environments: ['dev']
 
+  # Sh scripts
   init:
    - npm install
    # Which equals:
@@ -21,13 +22,16 @@
   test:
    - grunt test
 
-  # XXX: new package schema?
+  # Pd per-project config
   pd-meta:
+    tasks:
+      slug: JNK-UC
+    # XXX: JNK-UC-1: Would need some new package schema to generate/update NPM
     npm:
       test:
-        - pd:check
-        - pd:test
+        - 'pd:check'
+        - 'pd:test'
       install:
-        - pd:check
-        - pd:test
+        - 'pd:check'
+        - 'pd:test'
 
